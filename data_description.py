@@ -26,7 +26,7 @@ class Description:
                 self.showData()
 
             elif val==-1:
-                sys.exit()
+                break
 
     def description_column(self):
         print("Columns: ")
