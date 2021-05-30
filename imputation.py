@@ -84,69 +84,71 @@ class Imputation:
             while True:
                 col=input("Enter the column you want to be filled with mean: ")
                 if col in self.data.columns:
-                    self.data[col].replace(np.nan, self.data[col].mean(inplace=True))
+                    if self.data.dtypes[col]==np.object:
+                        print(col+" doesnt't have numeric values so can't be filled with mean")
+                        break
+                    self.data[col].replace(np.nan, self.data[col].mean(),inplace=True)
                     print("Column's Null values "+col+" are filled with mean of the "+col)
                     break
                 else:
                     print("You entered the wrong value of column, which is not present in columns. So please re-enter the column name.")
                     continue 
+            val=int(input("If you want to remove more press 1 else 0: "))
+            print()
+            if val==1:
+                continue
+            elif val==0:
+                break    
         
         
     def null_median(self):
-
-        print("There are option you can choose: ")
-        print("1. Replace all the null values of columns with median")
-        print("2. Replace the null values of column with median")
-        print()
-        val=int(input("Enter the choice: "))
-
-        if val==1:
-            self.data.fillna(self.data.median(inplace=True))
-            print("All null values are replaced with median")
-
-        elif val==2:
+        while True:
+            print("The list of columns: ")
+            for i in self.data.columns:
+                print(i, end="  ")
+            print()
             while True:
-                print("The list of columns: ")
-                for i in self.data.columns:
-                    print(i, end="  ")
-                print()
-                while True:
-                    col=input("Enter the column you want to be filled with median: ")
-                    if col in self.data.columns:
-                        self.data[col].replace(np.nan, self.data[col].median(inplace=True))
-                        print("Column's Null values "+col+" are filled with median of the "+col)
+                col=input("Enter the column you want to be filled with median: ")
+                if col in self.data.columns:
+                    if self.data.dtypes[col]==np.object:
+                        print(col+" doesnt't have numeric values so can't be filled with median")
                         break
-                    else:
-                        print("You entered the wrong value of column, which is not present in columns. So please re-enter the column name.")
-                        continue 
+                    self.data[col].replace(np.nan, self.data[col].median(), inplace=True)
+                    print("Column's Null values "+col+" are filled with median of the "+col)
+                    break
+                else:
+                    print("You entered the wrong value of column, which is not present in columns. So please re-enter the column name.")
+                    continue 
+
+            val=int(input("If you want to remove more press 1 else 0: "))
+            print()
+            if val==1:
+                continue
+            elif val==0:
+                break  
 
     def null_mode(self):
-
-        print("There are option you can choose: ")
-        print("1. Replace all the null values of columns with mode")
-        print("2. Replace the null values of column with mode")
-        print()
-        val=int(input("Enter the choice: "))
-
-        if val==1:
-            self.data.fillna(self.data.mode(inplace=True))
-            print("All null values are replaced with mode")
-
-        elif val==2:
+        while True:
+            print("The list of columns: ")
+            for i in self.data.columns:
+                print(i, end="  ")
+            print()
             while True:
-                print("The list of columns: ")
-                for i in self.data.columns:
-                    print(i, end="  ")
-                print()
-                while True:
-                    col=input("Enter the column you want to be filled with mode: ")
-                    if col in self.data.columns:
-                        self.data[col].replace(np.nan, self.data[col].mode(inplace=True))
-                        print("Column's Null values "+col+" are filled with mode of the "+col)
-                        break
-                    else:
-                        print("You entered the wrong value of column, which is not present in columns. So please re-enter the column name.")
-                        continue 
+                col=input("Enter the column you want to be filled with mode: ")
+                if col in self.data.columns:
+                    self.data[col].replace(np.nan, self.data[col].mode()[0], inplace=True)
+                    print("Column's Null values "+col+" are filled with mode of the "+col)
+                    break
+                else:
+                    print("You entered the wrong value of column, which is not present in columns. So please re-enter the column name.")
+                    continue    
+
+            val=int(input("If you want to remove more press 1 else 0: "))
+            print()
+            if val==1:
+                continue
+            elif val==0:
+                break  
 
     def showDataset(self):
         rows = int(input("Enter number of rows: "))
