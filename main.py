@@ -2,6 +2,7 @@ import sys
 import pandas as pd
 from data_description import Description
 from imputation import Imputation
+from categorical import Categorical_Encoding
 
 class preProcessing:
     def __init__(self):
@@ -53,6 +54,10 @@ class preProcessing:
             elif(val==2):
                 obj2=Imputation(self.df)
                 obj2.tasks()
+
+            elif(val==3):
+                obj3=Categorical_Encoding(self.df)
+                obj3.tasks()
 
             elif(val==-1):
                 break
