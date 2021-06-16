@@ -3,6 +3,8 @@ import pandas as pd
 from data_description import Description
 from imputation import Imputation
 from categorical import Categorical_Encoding
+from feature_scaling import Features
+from download import Download
 
 class preProcessing:
     def __init__(self):
@@ -58,6 +60,14 @@ class preProcessing:
             elif(val==3):
                 obj3=Categorical_Encoding(self.df)
                 obj3.tasks()
+
+            elif(val==4):
+                obj4=Features(self.df)
+                obj4.tasks()
+
+            elif(val==5):
+                obj5=Download(self.df)
+                obj5.tasks()
 
             elif(val==-1):
                 break
